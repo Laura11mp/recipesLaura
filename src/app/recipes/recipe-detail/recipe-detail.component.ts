@@ -3,26 +3,26 @@ import { SupabaseService } from '../../services/supabase.service';
 import { IRecipe } from '../i-recipe';
 import { IngredientComponent } from "../ingredient/ingredient.component";
 import { Ingredient } from '../ingredient';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-recipe-detail',
-  imports: [IngredientComponent],
+  imports: [IngredientComponent, RouterLink],
   templateUrl: './recipe-detail.component.html',
   styleUrl: './recipe-detail.component.css'
 })
 export class RecipeDetailComponent implements OnInit {
 
-  @Input('id') recipeID?: string;
+  @Input('id') recipeID?: string; //Ixe recipe id es el que se mostrara en el .html
   public recipe: IRecipe | undefined;
   public ingredients: Ingredient[] = [];
 
-  constructor(private supabaseService: SupabaseService) {
+  constructor(private supabaseService: SupabaseService){
 
   }
 
   ngOnInit(): void {
-
     this.supabaseService.getMeals(this.recipeID).subscribe({
       next: meals => {
         this.recipe = meals[0];
@@ -33,7 +33,7 @@ export class RecipeDetailComponent implements OnInit {
         });
       },
       error: err => console.log(err),
-      complete: () => console.log('Received')
-    })
+      complete: ()=> console.log('Received')
+    });
   }
 }

@@ -3,31 +3,39 @@
     <form [formGroup]="registerForm">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" name="email" formControlName="email" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp" [ngClass]="emailClass" />
-
-            @if(emailNotValid){
-            <div class="alert alert-danger">
-                Email requerit en arroba
-            </div>
-            }
+            <input 
+                type="email" 
+                name="email" 
+                class="form-control" 
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                formControlName="email"
+                [ngClass]="emailClass"
+            />
         </div>
-
-        <div class="mb-3" formGroupName="passwords">
-            <!-- {{registerForm.get('passwords')?.status}} -->
+        <div class="mb-3" formGroupName="passwords" [ngClass]="crossPasswordsNotValid ? 'is-invalid' : 'is-valid'">
+            
+            {{registerForm.get('passwords')?.status}}
+            
             <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password2" class="form-control" id="exampleInputPassword1" name="password"
-                formControlName="password" [ngClass]="password1NotValid" />
+            <input 
+                type="password" 
+                class="form-control" 
+                id="exampleInputPassword1" 
+                name="password"
+                formControlName="password"
+                [ngClass]="password1NotValid"
+            />
             <label for="exampleInputPassword1" class="form-label">Repeat Password</label>
-            <input type="password2" class="form-control" id="exampleInputPassword2" name="password2"
-                formControlName="password2" [ngClass]="password2NotValid" />
+            <input 
+                type="password" 
+                class="form-control" 
+                id="exampleInputPassword2" 
+                name="password2"
+                formControlName="password2"
+                [ngClass]="password2NotValid"
+            />
         </div>
-
-        <button type="submit" class="btn btn-primary" (click)="sendRegister()">Registrar</button>
-
-        @if (error) {
-        <div class="alert alert-danger">{{error}}</div>
-        }
-
+        <button type="submit" class="btn btn-primary" (click)="sendRegister()">Register</button>
     </form>
 </div>
